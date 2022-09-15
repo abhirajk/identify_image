@@ -1,3 +1,6 @@
+from Frame import Frame
+
+
 class CenterShift:
     xcenter, ycenter, xshift, yshift, xperc, yperc, width, height = 0, 0, 0, 0, 0, 0, 0, 0;
 
@@ -16,3 +19,10 @@ class CenterShift:
                + ", xcenter: " + str(self.xcenter) + ", ycenter: " + str(self.ycenter) \
                + ", xshift: " + str(self.xshift) + ", yshift: " + str(self.yshift) \
                + ", width: " + str(self.width) + ", height: " + str(self.height) + " }";
+
+    @staticmethod
+    def computeCenterShift(frame: Frame):
+        if len(frame.targets) == 0 or len(frame.targets) > 1:
+            return None;
+        else:
+            return CenterShift(frame.targets[0].location.centerPoint(), frame.targets[0].location.width, frame.targets[0].location.height, frame.width, frame.height);

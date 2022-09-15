@@ -1,6 +1,7 @@
 import cv2
 
 import ImageLibrary
+from CenterShift import CenterShift
 
 from DetectionEngine import DetectionEngine
 from Frame import Frame
@@ -12,7 +13,7 @@ def main():
     frame = detectionEngine.detect(img);
     print(frame);
     print(frame.hasTarget())
-    print(frame.getCenterShift());
+    print(CenterShift.computeCenterShift(frame));
     cv2.imwrite("/home/pi/identify_image/testperson_1_dout.jpg", ImageLibrary.drawDetectedImage(frame));
     cv2.imwrite("/home/pi/identify_image/testperson_1_out.jpg", ImageLibrary.drawOriginalImage(frame));
 

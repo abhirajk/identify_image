@@ -1,6 +1,4 @@
 from Location import Location
-from CenterShift import CenterShift
-
 
 class Frame:
     targets = [];
@@ -41,12 +39,6 @@ class Frame:
 
     def hasTarget(self):
         return len(self.targets)>0;
-
-    def getCenterShift(self):
-        if len(self.targets) == 0 or len(self.targets) > 1:
-            return None;
-        else:
-            return CenterShift(self.targets[0].location.centerPoint(), self.targets[0].location.width, self.targets[0].location.height, self.width, self.height);
 
     def __str__(self):
         return "{ width: "+str(self.width)+", height: "+str(self.height) \
