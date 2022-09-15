@@ -9,8 +9,7 @@ from Frame import Frame
 def main():
     img = cv2.imread("/home/pi/identify_image/testperson_1.jpg", cv2.IMREAD_UNCHANGED)
     detectionEngine = DetectionEngine("/home/pi/identify_image/models/picam-example/mobilenet_v2.tflite", "/home/pi/identify_image/models/picam-example/labels/coco_labels.txt")
-    frame = Frame(img);
-    detectionEngine.detect(frame);
+    frame = detectionEngine.detect(img);
     print(frame);
     print(frame.hasTarget())
     print(frame.getCenterShift());

@@ -42,9 +42,9 @@ class DetectionEngine:
         if input_details[0]['dtype'] == np.float32:
             self.floatingModel = True
 
-    def detect(self, frame: Frame):
+    def detect(self, image):
+        frame = Frame(image);
         oheight, owidth, channels = frame.image.shape;
-        picture = None;
         paddingSize = (0,0);
         if (self.height / self.width) != (oheight / owidth):
             rheight = self.height;
@@ -65,7 +65,6 @@ class DetectionEngine:
         else:
             picture = cv2.resize(frame.image, (self.width, self.height));
 
-        print('Resize Dimension    : ', picture.shape);
         frame.setProcessedImage(picture);
         input_data = np.expand_dims(picture, axis=0)
         if self.floatingModel:
@@ -88,4 +87,6 @@ class DetectionEngine:
                 classId = int(detected_classes[0][i])
                 type = self.labels[classId]
                 frame.appendTarget(Target(type, score, location))
+
+        return frame
 

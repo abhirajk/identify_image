@@ -2,7 +2,6 @@ class CenterShift:
     xcenter, ycenter, xshift, yshift, xperc, yperc, width, height = 0, 0, 0, 0, 0, 0, 0, 0;
 
     def __init__(self, centerPoint, targetWidth: int, targetHeight: int, width: int, height: int):
-        print(centerPoint);
         self.xcenter = centerPoint[0];
         self.ycenter = centerPoint[1];
         self.xshift = int((targetWidth / 2) - self.xcenter);
