@@ -17,16 +17,18 @@ class Frame:
         self.width = image.shape[1]
         self.targets = [];
 
-    def buildLocation(self, detectedBox):
+    def buildLocation(self, detectedBox, paddingSize):
         top, left, bottom, right = detectedBox;
-        x = left * self.width;
-        y = top * self.height;
+        pheight = paddingSize[0];
+        pwidth = paddingSize[1];
         dx = left * self.dwidth;
         dy = top * self.dheight;
-        w = (right * self.width) - x;
-        h = (bottom * self.height) - y;
         dw = (right * self.dwidth) - dx;
         dh = (bottom * self.dheight) - dy;
+        x = (dx * self.width / (self.dwidth - pwidth));
+        y = (dy * self.height / (self.dheight - pheight));
+        w = (dw * self.width / (self.dwidth - pwidth));
+        h = (dh * self.height / (self.dheight - pheight));
         return Location(int(x), int(y), int(w), int(h), int(dx), int(dy), int(dw), int(dh));
 
     def appendTarget(self, target):

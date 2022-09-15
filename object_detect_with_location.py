@@ -120,7 +120,7 @@ def InferenceTensorFlow(image, model, label=None):
 
 
 def main():
-    img = cv2.imread("/home/pi/identify_image/testperson1.jpg", cv2.IMREAD_UNCHANGED)
+    img = cv2.imread("/home/pi/identify_image/testperson_1.jpg", cv2.IMREAD_UNCHANGED)
 
     # get dimensions of image
     dimensions = img.shape

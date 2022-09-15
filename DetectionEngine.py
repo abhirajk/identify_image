@@ -45,6 +45,7 @@ class DetectionEngine:
     def detect(self, frame: Frame):
         oheight, owidth, channels = frame.image.shape;
         picture = None;
+        paddingSize = (0,0);
         if (self.height / self.width) != (oheight / owidth):
             rheight = self.height;
             rwidth = self.width;
@@ -59,6 +60,7 @@ class DetectionEngine:
                 rheight = int((rwidth / owidth) * oheight);
                 bottom = self.height - rheight;
             picture = cv2.resize(frame.image, (rwidth, rheight));
+            paddingSize = (bottom, right);
             picture = cv2.copyMakeBorder(picture, top, bottom, left, right, cv2.BORDER_CONSTANT, 0)
         else:
             picture = cv2.resize(frame.image, (self.width, self.height));
@@ -82,7 +84,7 @@ class DetectionEngine:
         for i in range(int(num_boxes)):
             score = detected_scores[0][i]
             if score > 0.5:
-                location = frame.buildLocation(detected_boxes[0][i])
+                location = frame.buildLocation(detected_boxes[0][i], paddingSize)
                 classId = int(detected_classes[0][i])
                 type = self.labels[classId]
                 frame.appendTarget(Target(type, score, location))
