@@ -1,14 +1,19 @@
 class CenterShift:
-    xperc, yperc, width, height = 0, 0, 0, 0;
+    xcenter, ycenter, xshift, yshift, xperc, yperc, width, height = 0, 0, 0, 0, 0, 0, 0, 0;
 
-    def __init__(self, centerPoint, width: int, height: int):
+    def __init__(self, centerPoint, targetWidth: int, targetHeight: int, width: int, height: int):
         print(centerPoint);
-        self.xperc = int(((width / 2) - centerPoint[0]) * 100 / width);
-        self.yperc = int(((height / 2) - centerPoint[1]) * 100 / height);
-        self.width = width;
-        self.height = height;
+        self.xcenter = centerPoint[0];
+        self.ycenter = centerPoint[1];
+        self.xshift = int((targetWidth / 2) - self.xcenter);
+        self.yshift = int((targetHeight / 2) - self.ycenter);
+        self.xperc = int(self.xshift * 100 / width);
+        self.yperc = int(self.yshift * 100 / height);
+        self.width = targetWidth;
+        self.height = targetHeight;
 
     def __str__(self):
         return "{ xperc: " + str(self.xperc) + ", yperc: " + str(self.yperc) \
-               + ", xpixel: " + str(int(self.xperc * self.width / 100)) + ", ypixel: " + str(int(self.yperc * self.height / 100)) \
+               + ", xcenter: " + str(self.xcenter) + ", ycenter: " + str(self.ycenter) \
+               + ", xshift: " + str(self.xshift) + ", yshift: " + str(self.yshift) \
                + ", width: " + str(self.width) + ", height: " + str(self.height) + " }";

@@ -10,7 +10,7 @@ class Location:
         self.dheight = dh;
 
     def centerPoint(self):
-        return tuple((int((self.x + self.width) / 2), int((self.y + self.height) / 2)))
+        return tuple((int(self.x + (self.width / 2)), int(self.y + (self.height / 2))))
 
     def __str__(self):
         return "{ x: " + str(self.x) +", y: " + str(self.y) +", width: " + str(self.width) + ", height: " + str(self.height) \

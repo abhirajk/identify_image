@@ -60,7 +60,7 @@ class DetectionEngine:
                 rheight = int((rwidth / owidth) * oheight);
                 bottom = self.height - rheight;
             picture = cv2.resize(frame.image, (rwidth, rheight));
-            paddingSize = (bottom, right);
+            paddingSize = (right, bottom);
             picture = cv2.copyMakeBorder(picture, top, bottom, left, right, cv2.BORDER_CONSTANT, 0)
         else:
             picture = cv2.resize(frame.image, (self.width, self.height));

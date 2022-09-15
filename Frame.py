@@ -19,8 +19,8 @@ class Frame:
 
     def buildLocation(self, detectedBox, paddingSize):
         top, left, bottom, right = detectedBox;
-        pheight = paddingSize[0];
-        pwidth = paddingSize[1];
+        pwidth = paddingSize[0];
+        pheight = paddingSize[1];
         dx = left * self.dwidth;
         dy = top * self.dheight;
         dw = (right * self.dwidth) - dx;
@@ -36,7 +36,6 @@ class Frame:
 
     def setProcessedImage(self, processedImage):
         self.processedImage = processedImage;
-        print('Resize Dimension    : ', processedImage.shape);
         self.dheight = processedImage.shape[0]
         self.dwidth = processedImage.shape[1]
 
@@ -47,7 +46,7 @@ class Frame:
         if len(self.targets) == 0 or len(self.targets) > 1:
             return None;
         else:
-            return CenterShift(self.targets[0].location.centerPoint(), self.width, self.height);
+            return CenterShift(self.targets[0].location.centerPoint(), self.targets[0].location.width, self.targets[0].location.height, self.width, self.height);
 
     def __str__(self):
         return "{ width: "+str(self.width)+", height: "+str(self.height) \
