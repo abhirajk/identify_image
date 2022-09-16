@@ -1,5 +1,6 @@
 from Location import Location
 
+
 class Frame:
     targets = [];
     width, height = 0, 0;
@@ -37,10 +38,13 @@ class Frame:
         self.dheight = processedImage.shape[0]
         self.dwidth = processedImage.shape[1]
 
-    def hasTarget(self):
-        return len(self.targets)>0;
+    def hasTarget(self, kind):
+        for target in self.targets:
+            if (target.kind == kind):
+                return True;
+        return False;
 
     def __str__(self):
-        return "{ width: "+str(self.width)+", height: "+str(self.height) \
-                + ", dwidth: "+str(self.width)+", dheight: "+str(self.height) \
-                + ", targets: [ "+("".join([str(target) for target in self.targets]))+" ] }";
+        return "{ width: " + str(self.width) + ", height: " + str(self.height) \
+               + ", dwidth: " + str(self.width) + ", dheight: " + str(self.height) \
+               + ", targets: [ " + ("".join([str(target) for target in self.targets])) + " ] }";
