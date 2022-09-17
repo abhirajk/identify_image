@@ -1,4 +1,4 @@
-from Location import Location
+from .Location import Location
 
 
 class Target:
@@ -8,4 +8,4 @@ class Target:
         self.location = location;
 
     def __str__(self):
-        return "{ kind: "+self.kind+", score: "+str(self.score)+", location: "+str(self.location)+" }";
+        return "{ kind: " + self.kind + ", score: " + str(self.score) + ", location: " + str(self.location) + " }";

@@ -1,10 +1,11 @@
-from Frame import Frame
+from .DetectedFrame import DetectedFrame
 
 
 class TargetShift:
     xcenter, ycenter, xshift, yshift, xperc, yperc, targetWidth, targetHeight = 0, 0, 0, 0, 0, 0, 0, 0;
 
-    def __init__(self, xcenter: int, ycenter: int, xshift: int, yshift: int, xperc: int, yperc: int, targetWidth: int, targetHeight: int):
+    def __init__(self, xcenter: int, ycenter: int, xshift: int, yshift: int, xperc: int, yperc: int, targetWidth: int,
+                 targetHeight: int):
         self.xcenter = xcenter;
         self.ycenter = ycenter;
         self.xshift = xshift;
@@ -21,7 +22,7 @@ class TargetShift:
                + ", width: " + str(self.targetWidth) + ", height: " + str(self.targetHeight) + " }";
 
     @staticmethod
-    def computeCenterShift(frame: Frame):
+    def computeCenterShift(frame: DetectedFrame):
         if len(frame.targets) == 0 or len(frame.targets) > 1:
             return None;
         else:

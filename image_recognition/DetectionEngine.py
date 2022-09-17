@@ -3,8 +3,8 @@ import numpy as np
 
 import tflite_runtime.interpreter as tflite
 
-from Frame import Frame
-from Target import Target
+from .DetectedFrame import DetectedFrame
+from .Target import Target
 
 
 class DetectionEngine:
@@ -43,9 +43,9 @@ class DetectionEngine:
             self.floatingModel = True
 
     def detect(self, image):
-        frame = Frame(image);
+        frame = DetectedFrame(image);
         oheight, owidth, channels = frame.image.shape;
-        paddingSize = (0,0);
+        paddingSize = (0, 0);
         if (self.height / self.width) != (oheight / owidth):
             rheight = self.height;
             rwidth = self.width;
@@ -53,7 +53,7 @@ class DetectionEngine:
             left = 0;
             bottom = 0;
             right = 0;
-            if oheight>owidth:
+            if oheight > owidth:
                 rwidth = int((rheight / oheight) * owidth);
                 right = self.width - rwidth;
             else:
@@ -89,4 +89,3 @@ class DetectionEngine:
                 frame.appendTarget(Target(type, score, location))
 
         return frame
-

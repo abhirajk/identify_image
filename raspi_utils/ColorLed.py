@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO;
 import time;
 
+
 class ColorLed:
     on = GPIO.HIGH;
     off = GPIO.LOW;

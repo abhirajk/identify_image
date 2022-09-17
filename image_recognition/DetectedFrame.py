@@ -1,7 +1,7 @@
-from Location import Location
+from .Location import Location
 
 
-class Frame:
+class DetectedFrame:
     targets = [];
     width, height = 0, 0;
     dwidth, dheight = 0, 0;
