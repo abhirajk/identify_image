@@ -1,10 +1,6 @@
-import RPi.GPIO as GPIO
 import time
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-GPIO.setup(21, GPIO.OUT);
-print("LED on");
 
-time.sleep(1)
-print("LED off");
-GPIO.output(21, GPIO.LOW);
+from ColorLed import ColorLed
+
+cled1 = ColorLed(17,27,22);
+cled1.cycle(0.5);

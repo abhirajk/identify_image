@@ -38,9 +38,9 @@ class Frame:
         self.dheight = processedImage.shape[0]
         self.dwidth = processedImage.shape[1]
 
-    def hasTarget(self, kind):
+    def hasTarget(self, kind, minScore):
         for target in self.targets:
-            if (target.kind == kind):
+            if target.kind == kind and target.score >= minScore:
                 return True;
         return False;
 
