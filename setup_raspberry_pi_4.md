@@ -35,6 +35,7 @@ Switch to virtual env
 ```commandline
 source ~/.bashrc
 mkvirtualenv iimg -p python3
+workon iimg
 pip3 install "picamera[array]"
 pip3 install opencv-python
 pip3 install RPi.GPIO
