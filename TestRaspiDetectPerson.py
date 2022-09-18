@@ -44,7 +44,7 @@ def main():
         start = time.process_time_ns();
         detectedFrame = detectionEngine.detect(frame.array);
         end = time.process_time_ns();
-        print("TimeTaken: ", str((end - start) / 1000000), "ms", " Frame: ", detectedFrame);
+        print("TimeTaken: ", str((end - start) / 1000000), "ms", " Person: ", detectedFrame.hasTarget("person", 0.7));
         if detectedFrame.hasTarget("person", 0.7):
             colorLed.color("green");
             noPersonFoundCount = 0;
