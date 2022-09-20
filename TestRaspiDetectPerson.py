@@ -22,16 +22,20 @@ def sigint_handler(sig, frame):
 signal.signal(signal.SIGINT, sigint_handler)
 
 
-def main():
-    detectionEngine = DetectionEngine("/home/pi/identify_image/models/picam-example/mobilenet_v2.tflite",
-                                      "/home/pi/identify_image/models/picam-example/labels/coco_labels.txt")
+def main(args: list[str]) -> None:
+    #detectionEngine = DetectionEngine("/home/pi/identify_image/models/picam-example/mobilenet_v2.tflite",
+    #                                  "/home/pi/identify_image/models/picam-example/labels/coco_labels.txt")
+    if len(args) < 2:
+        print("Required parameter model file & labels file missing");
+        exit(1);
+
+    detectionEngine = DetectionEngine(args[0], args[1]);
 
     # Setup camera
     camera = PiCamera()
     camera.exposure_mode = "sports";
     camera.iso = 800;
     camera.resolution = (640, 480);
-    camera.vflip = True;
     rawCapture = PiRGBArray(camera);
     # allow the camera to warmup
     time.sleep(0.1)
@@ -45,6 +49,7 @@ def main():
         detectedFrame = detectionEngine.detect(frame.array);
         end = time.process_time_ns();
         print("TimeTaken: ", str((end - start) / 1000000), "ms", " Person: ", detectedFrame.hasTarget("person", 0.7));
+
         if detectedFrame.hasTarget("person", 0.7):
             colorLed.color("green");
             noPersonFoundCount = 0;
@@ -60,4 +65,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])

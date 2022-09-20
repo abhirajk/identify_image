@@ -20,9 +20,18 @@ class DetectionEngine:
         with open(labelFile, 'r') as f:
             lines = f.readlines()
         ret = {}
+        index = 0;
         for line in lines:
-            pair = line.strip().split(maxsplit=1)
-            ret[int(pair[0])] = pair[1].strip()
+            pair = line.strip().split(maxsplit=1);
+            if len(pair) == 1:
+                label = pair[0].strip();
+            elif pair[0].isnumeric():
+                index = int(pair[0]);
+                label = pair[1].strip();
+            else:
+                label = pair[0].strip() + " " + pair[1].strip();
+            ret[index] = label;
+            index += 1;
         return ret
 
     def __init__(self, modelFile, labelFile):
