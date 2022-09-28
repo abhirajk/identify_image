@@ -46,3 +46,6 @@ class ColorLed:
         colorValue = ColorLed.colors["off"];
         for pin in range(0, 3):
             GPIO.output(self.colorPin[pin], colorValue[pin]);
+
+    def cleanup(self):
+        GPIO.cleanup();

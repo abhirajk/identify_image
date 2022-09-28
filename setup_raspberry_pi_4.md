@@ -90,6 +90,7 @@ python3 examples/classify_image.py \
 ERROR: No module named 'pycoral'
 ```
 https://discuss.tensorflow.org/t/raspberry-pi-build-process-broken/5470
+https://coral.ai/software/#pycoral-api
 
 Fix pycoral
 ```commandline

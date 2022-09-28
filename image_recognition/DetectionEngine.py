@@ -40,7 +40,7 @@ class DetectionEngine:
         else:
             self.labels = None
 
-        self.interpreter = tflite.Interpreter(model_path=modelFile, num_threads=4)
+        self.interpreter = tflite.Interpreter(model_path=modelFile, num_threads=4, experimental_delegates=[tflite.load_delegate('libedgetpu.so.1')])
         self.interpreter.allocate_tensors()
 
         input_details = self.interpreter.get_input_details()

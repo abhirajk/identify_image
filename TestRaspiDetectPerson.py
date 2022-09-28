@@ -1,6 +1,7 @@
 from picamera.array import PiRGBArray
 from picamera import PiCamera
 import time
+from sense_hat import SenseHat
 
 from raspi_utils.ColorLed import ColorLed
 
@@ -10,12 +11,41 @@ import signal
 import sys
 
 # Setup LED
-colorLed = ColorLed(17, 27, 22);
+# colorLed = ColorLed(17, 27, 22);
+
+# Define some colours
+r = (255, 0, 0) # Red
+g = (0, 255, 0) # Green
+b = (0, 0, 0) # Black
+
+# Set up where each colour will display
+person = [
+    b, b, b, b, b, b, b, b,
+    b, b, b, g, g, b, b, b,
+    b, b, g, b, b, g, b, b,
+    b, b, g, b, b, g, b, b,
+    b, b, b, g, g, b, b, b,
+    b, b, g, b, b, g, b, b,
+    b, g, b, b, b, b, g, b,
+    b, g, b, b, b, b, g, b
+]
+noperson = [
+    b, b, r, r, r, r, b, b,
+    b, r, b, g, g, b, r, b,
+    r, b, g, b, b, r, b, r,
+    r, b, g, b, r, g, b, r,
+    r, b, b, r, g, b, b, r,
+    r, b, r, b, b, g, b, r,
+    b, r, b, b, b, b, r, b,
+    b, g, r, r, r, r, g, b
+]
+sense = SenseHat()
+sense.low_light = True;
 
 
 def sigint_handler(sig, frame):
     print('KeyboardInterrupt is caught');
-    colorLed.off();
+    sense.clear();
     sys.exit(0)
 
 
@@ -51,13 +81,13 @@ def main(args: list[str]) -> None:
         print("TimeTaken: ", str((end - start) / 1000000), "ms", " Person: ", detectedFrame.hasTarget("person", 0.7));
 
         if detectedFrame.hasTarget("person", 0.7):
-            colorLed.color("green");
+            sense.set_pixels(person);
             noPersonFoundCount = 0;
             if (personFoundCount < 5):
                 personFoundCount += 1;
             time.sleep(personFoundCount / 10);
         else:
-            colorLed.color("red");
+            sense.set_pixels(noperson);
             personFoundCount = 0;
             if (noPersonFoundCount < 5):
                 noPersonFoundCount += 1;
