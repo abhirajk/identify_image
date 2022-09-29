@@ -112,4 +112,8 @@ python3 classify_image.py \
 ```
 
 
-
+```commandline
+sudo apt-get install libatlas-base-dev
+pip install -U numpy
+sudo reboot
+```
