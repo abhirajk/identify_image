@@ -1,8 +1,9 @@
 from .Location import Location
+from .Target import Target
 
 
 class DetectedFrame:
-    targets = [];
+    targets: list[Target] = [];
     width, height = 0, 0;
     dwidth, dheight = 0, 0;
     image = None;
@@ -30,7 +31,7 @@ class DetectedFrame:
         h = (dh * self.height / (self.dheight - pheight));
         return Location(int(x), int(y), int(w), int(h), int(dx), int(dy), int(dw), int(dh));
 
-    def appendTarget(self, target):
+    def appendTarget(self, target: Target):
         self.targets.append(target);
 
     def setProcessedImage(self, processedImage):
@@ -44,6 +45,20 @@ class DetectedFrame:
                 return True;
         return False;
 
+    def getTarget(self, kind, minScore) -> Target:
+        bestTarget = None;
+        bestScore = 0;
+        for target in self.targets:
+            if target.kind == kind and target.score >= minScore:
+                if target.score > bestScore:
+                    bestTarget = target;
+                    bestScore = target.score
+        return bestTarget;
+
+
+    def dump(self):
+        return str(self);
+    
     def __str__(self):
         return "{ width: " + str(self.width) + ", height: " + str(self.height) \
                + ", dwidth: " + str(self.width) + ", dheight: " + str(self.height) \

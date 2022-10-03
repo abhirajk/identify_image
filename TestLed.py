@@ -2,7 +2,7 @@ from raspi_utils.Led import Led
 import sys
 
 # Setup LED
-leds = [Led(23), Led(13), Led(19), Led(26)];
+leds = [Led(19), Led(20), Led(16), Led(12)];
 def main(args: list[str]) -> None:
     for led in leds:
         led.blink(2);
