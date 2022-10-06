@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 import numpy as np
 
-servoPIN = 21
+servoPIN = 26
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(servoPIN, GPIO.OUT)
 

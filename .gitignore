@@ -2,3 +2,5 @@
 __pycache__
 ._*
 venv/
+.fuse*
+.DS_*

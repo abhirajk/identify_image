@@ -5,6 +5,7 @@ import tflite_runtime.interpreter as tflite
 
 from .DetectedFrame import DetectedFrame
 from .Target import Target
+from pathlib import Path
 
 
 class DetectionEngine:
@@ -17,6 +18,8 @@ class DetectionEngine:
 
     @staticmethod
     def ReadLabelFile(labelFile):
+        if not Path(labelFile).is_file():
+            return {};
         with open(labelFile, 'r') as f:
             lines = f.readlines()
         ret = {}
@@ -39,8 +42,9 @@ class DetectionEngine:
             self.labels = DetectionEngine.ReadLabelFile(labelFile)
         else:
             self.labels = None
-
+        print("Creating tflite.Interpreter...")
         self.interpreter = tflite.Interpreter(model_path=modelFile, num_threads=4, experimental_delegates=[tflite.load_delegate('libedgetpu.so.1')])
+        print("Created tflite.Interpreter")
         self.interpreter.allocate_tensors()
 
         input_details = self.interpreter.get_input_details()

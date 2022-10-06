@@ -2,6 +2,7 @@ from picamera.array import PiRGBArray
 from picamera import PiCamera
 import time
 import cv2
+from sense_hat import SenseHat
 
 from image_recognition.ImageUtils import drawDetectedImage
 from image_recognition.TargetShift import TargetShift, computeCenterShift
@@ -15,7 +16,11 @@ import sys
 # Setup LED
 # colorLed = ColorLed(17, 27, 22);
 # Display object on sense hat
-display = SenseDetectDisplay();
+print("Creating SenseDetectDisplay...")
+sense = SenseHat();
+display = SenseDetectDisplay(sense, shapeFilePath = "raspi_utils/data/detect_person.png"
+                             , shapeLabelFilePath = "raspi_utils/data/detect_person.txt");
+print("Created SenseDetectDisplay");
 
 def sigint_handler(sig, frame):
     print('KeyboardInterrupt is caught');
@@ -31,7 +36,9 @@ def main(args: list[str]) -> None:
         print("Required parameter model file & labels file missing");
         exit(1);
 
+    print("Creating DetectionEngine...")
     detectionEngine = DetectionEngine(args[0], args[1]);
+    print("Created DetectionEngine")
 
     # Setup camera
     camera = PiCamera()
@@ -44,6 +51,7 @@ def main(args: list[str]) -> None:
 
     noPersonFoundCount = 0;
     personFoundCount = 0;
+    print("Start sensing...");
     for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
         rawCapture.truncate()
         rawCapture.seek(0)
@@ -52,7 +60,7 @@ def main(args: list[str]) -> None:
         end = time.process_time_ns();
         targetShift = computeCenterShift(detectedFrame, "person");
         #cv2.imwrite("savedImage.jpeg", drawDetectedImage(detectedFrame));
-        print("TimeTaken: ", str((end - start) / 1000000), "ms - ", str(targetShift));
+        #print("TimeTaken: ", str((end - start) / 1000000), "ms - ", str(targetShift));
         if detectedFrame.hasTarget("person", 0.7):
             display.show("person");
             noPersonFoundCount = 0;
@@ -60,7 +68,7 @@ def main(args: list[str]) -> None:
                 personFoundCount += 1;
             time.sleep(personFoundCount / 10);
         else:
-            display.show("question");
+            display.show("noperson");
             personFoundCount = 0;
             if (noPersonFoundCount < 5):
                 noPersonFoundCount += 1;
