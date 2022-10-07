@@ -6,7 +6,6 @@ from raspi_utils.Led import Led
 
 
 class LedButton:
-    eventTime = 0;
     name = "";
     button = None;
     led = None;
@@ -15,22 +14,21 @@ class LedButton:
     def __init__(self, name: str, ledPin: int, buttonPin: int, callback=None):
         self.name = name;
         self.led = Led(ledPin);
+        self.led.off();
         self.callback = callback;
         self.button = Button(buttonPin, callback=lambda channel: self.ledButtonCallback(channel, self.led));
 
     def ledButtonCallback(self, channel, led):
-        ieventTime = time.monotonic_ns();
         istate: str = "off";
         if GPIO.input(channel) == GPIO.HIGH:
             istate = "on";
         if self.state == istate:
             print ("Ignoring - Same state", self.state," == ", istate);
             return;
-        if (ieventTime - self.eventTime) < 100000000:
-            print("Ignoring - Too soon event ", (ieventTime - self.eventTime), "ns");
+        time.sleep(1/1000);
+        if (GPIO.input(channel) == GPIO.HIGH and istate != "on") or (GPIO.input(channel) == GPIO.LOW and istate != "off"):
+            print("Ignoring - State changed since last checked ");
             return;
-        print("Registering after ", (ieventTime - self.eventTime), "ns");
-        self.eventTime = ieventTime;
         if istate == "on":
             led.on();
             self.callback(self, istate);

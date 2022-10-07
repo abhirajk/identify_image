@@ -96,3 +96,16 @@ class SenseDetectDisplay:
 
     def showText(self, text):
         self.sense.show_message(text, text_colour = x);
+
+    def showPixel(self, colors, sleep = 0):
+        self.sense.clear();
+        index = 0;
+        if(len(colors)>64):
+            return;
+        for color in colors:
+            row = int(index / 8);
+            col = (index % 8)
+            self.sense.set_pixel(col, row, color);
+            if sleep > 0:
+                time.sleep(sleep);
+            index = index + 1;
