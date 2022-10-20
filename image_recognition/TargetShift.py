@@ -28,20 +28,19 @@ class TargetShift:
 
 def computeCenterShift(frame: DetectedFrame, kind: str) -> TargetShift:
     if len(frame.targets) == 0 or len(frame.targets) > 1:
-        return None;
-    else:
-        target = frame.getTarget(kind, 0);
-        if target is not None:
-            centerPoint = target.location.centerPoint();
-            targetWidth = target.location.width;
-            targetHeight = target.location.height;
-            width = frame.width;
-            height = frame.height;
-            xcenter = centerPoint[0];
-            ycenter = centerPoint[1];
-            xshift = int((width / 2) - xcenter);
-            yshift = int((height / 2) - ycenter);
-            xperc = int(xshift * 100 / width);
-            yperc = int(yshift * 100 / height);
-            return TargetShift(xcenter, ycenter, xshift, yshift, xperc, yperc, targetWidth, targetHeight, width, height);
+        print("More targets");
+    target = frame.getTarget(kind, 0);
+    if target is not None:
+        centerPoint = target.location.centerPoint();
+        targetWidth = target.location.width;
+        targetHeight = target.location.height;
+        width = frame.width;
+        height = frame.height;
+        xcenter = centerPoint[0];
+        ycenter = centerPoint[1];
+        xshift = int((width / 2) - xcenter);
+        yshift = int((height / 2) - ycenter);
+        xperc = int(xshift * 100 / width);
+        yperc = int(yshift * 100 / height);
+        return TargetShift(xcenter, ycenter, xshift, yshift, xperc, yperc, targetWidth, targetHeight, width, height);
     return None;
