@@ -60,7 +60,7 @@ def main(args: list[str]) -> None:
         end = time.process_time_ns();
         targetShift = computeCenterShift(detectedFrame, "person");
         #cv2.imwrite("savedImage.jpeg", drawDetectedImage(detectedFrame));
-        #print("TimeTaken: ", str((end - start) / 1000000), "ms - ", str(targetShift));
+        print("TimeTaken: ", str((end - start) / 1000000), "ms - ", str(targetShift));
         if detectedFrame.hasTarget("person", 0.7):
             display.show("person");
             noPersonFoundCount = 0;

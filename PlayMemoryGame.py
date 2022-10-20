@@ -28,10 +28,10 @@ class Game:
     status = [];
 
     def __init__(self):
-        red = LedButton("red", 21, 19, callback=self.popLedOrder);
-        green = LedButton("green", 20, 13, callback=self.popLedOrder);
-        blue = LedButton("blue", 16, 6, callback=self.popLedOrder);
-        yellow = LedButton("yellow", 12, 5, callback=self.popLedOrder);
+        red = LedButton("red", ledPin=26, buttonPin=21, callback=self.popLedOrder);
+        green = LedButton("green", ledPin=19, buttonPin=20, callback=self.popLedOrder);
+        blue = LedButton("blue", ledPin=13, buttonPin=16, callback=self.popLedOrder);
+        yellow = LedButton("yellow", ledPin=6, buttonPin=12, callback=self.popLedOrder);
         self.ledButtons = [red, green, blue, yellow];
 
     def popLedOrder(self, ledButton, state):
