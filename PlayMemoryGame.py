@@ -64,6 +64,8 @@ class Game:
                             time.sleep(2);
                             display.clear();
                 return;
+        else:
+            print(ledButton.name);
 
     def resetGame(self):
         self.blinkCount = 4;
