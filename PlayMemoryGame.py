@@ -35,6 +35,7 @@ class Game:
         self.ledButtons = [red, green, blue, yellow];
 
     def popLedOrder(self, ledButton, state):
+        print("Led Button - ", ledButton.name);
         if len(self.ledOrder) > 0 and self.start == 1:
             if state == "on":
                 expected = self.ledOrder[0];
@@ -65,7 +66,6 @@ class Game:
                             display.clear();
                 return;
         else:
-            print("Led Button - ", ledButton.name);
             if(ledButton.name == "green"):
                 self.startGame();
             elif(ledButton.name == "blue"):
