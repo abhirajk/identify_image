@@ -65,6 +65,7 @@ class Game:
                             display.clear();
                 return;
         else:
+            print("Led Button - ", ledButton.name);
             if(ledButton.name == "green"):
                 self.startGame();
             elif(ledButton.name == "blue"):
