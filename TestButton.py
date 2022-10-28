@@ -17,7 +17,8 @@ def handleButton(channel, pin):
 def main(args: list[str]) -> None:
     for pin in args:
         Button(int(pin), callback=lambda channel: handleButton(channel, pin));
-
+    while True:
+        pass
 
 if __name__ == '__main__':
     main(sys.argv[1:])
