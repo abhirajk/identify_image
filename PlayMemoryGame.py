@@ -65,7 +65,12 @@ class Game:
                             display.clear();
                 return;
         else:
-            print(ledButton.name);
+            if(ledButton.name == "green"):
+                self.startGame();
+            elif(ledButton.name == "blue"):
+                self.decrement();
+            elif(ledButton.name == "yellow"):
+                self.increment();
 
     def resetGame(self):
         self.blinkCount = 4;
