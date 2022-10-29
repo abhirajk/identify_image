@@ -32,10 +32,10 @@ class Button:
             print("Ignoring - State changed since last checked ");
             return;
         if istate == "on":
-            self.callback(self, channel);
+            self.callback(channel);
             self.state = istate;
         else:
-            self.callback(self, channel);
+            self.callback(channel);
             self.state = istate;
 
 
