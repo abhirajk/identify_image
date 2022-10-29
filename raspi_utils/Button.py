@@ -7,7 +7,7 @@ _buttons = [];
 def scanButtons():
     while True:
         for btn in _buttons:
-            print("Button - ", btn.pin);
+            btn.buttonEventHandler(btn.pin);
         time.sleep(2);
     return;
 
@@ -32,7 +32,6 @@ class Button:
         _buttons.append(self);
 
     def buttonEventHandler(self, channel):
-        print("Channel :", channel);
         if GPIO.input(channel) == GPIO.HIGH:
             self.callback(channel);
         else:
