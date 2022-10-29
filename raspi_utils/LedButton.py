@@ -20,6 +20,7 @@ class LedButton:
 
     def ledButtonCallback(self, channel, led):
         istate: str = "off";
+        print ("Button - ", self.name, " - ", GPIO.input(channel));
         if GPIO.input(channel) == GPIO.HIGH:
             istate = "on";
         """
