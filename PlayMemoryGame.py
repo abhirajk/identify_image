@@ -36,7 +36,7 @@ class Game:
 
     def popLedOrder(self, ledButton, state):
         if len(self.ledOrder) > 0 and self.start == 1:
-            if state == "on":
+            if state == 1:
                 expected = self.ledOrder[0];
                 if expected != ledButton.name:
                     self.status[self.blinkCount - len(self.ledOrder)] = -1;
