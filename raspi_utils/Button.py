@@ -14,10 +14,10 @@ class Button:
         GPIO.setwarnings(False);
 
         GPIO.setup(self.pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.add_event_detect(self.pin, GPIO.BOTH, callback=lambda channel: self.buttonEventHandler(channel, self.callback))
+        GPIO.add_event_detect(self.pin, GPIO.BOTH, callback=lambda channel: self.buttonEventHandler(channel))
 
-    def buttonEventHandler(self, channel, callback=None):
-        if callback is None:
+    def buttonEventHandler(self, channel):
+        if self.callback is None:
             return;
         istate: str = "off";
         print("Button - ", self.pin, " - ", GPIO.input(channel));
