@@ -8,7 +8,7 @@ def scanButtons():
     while True:
         for btn in _buttons:
             btn.buttonEventHandler(btn.pin);
-        time.sleep(2);
+        time.sleep(0.25);
     return;
 
 
