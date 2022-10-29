@@ -22,6 +22,7 @@ class LedButton:
         istate: str = "off";
         if GPIO.input(channel) == GPIO.HIGH:
             istate = "on";
+        """
         #Using bouncetime on the button
         if self.state == istate:
             print ("Ignoring - Same state", self.state," == ", istate);
@@ -30,6 +31,7 @@ class LedButton:
         if (GPIO.input(channel) == GPIO.HIGH and istate != "on") or (GPIO.input(channel) == GPIO.LOW and istate != "off"):
             print("Ignoring - State changed since last checked ");
             return;
+        """
         if istate == "on":
             led.on();
             self.callback(self, istate);
