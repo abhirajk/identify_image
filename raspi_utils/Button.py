@@ -14,7 +14,7 @@ class Button:
         GPIO.setwarnings(False);
 
         GPIO.setup(self.pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.add_event_detect(self.pin, GPIO.BOTH, callback=lambda channel: self.buttonEventHandler(channel))
+        GPIO.add_event_detect(self.pin, GPIO.BOTH, callback=self.buttonEventHandler);
 
     def buttonEventHandler(self, channel):
         if self.callback is None:
